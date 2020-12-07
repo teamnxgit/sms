@@ -17,19 +17,19 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('index')->unique();
             $table->string('full_name');
-            $table->unsignedBigInteger('grade');
+            $table->longText('address')->nullable();
+            $table->string('town')->nullable();
             $table->date('dob');
-            $table->string('address_line_1')->nullable();
-            $table->string('address_line_2')->nullable();
-            $table->string('address_line_3')->nullable();
-            $table->string('address_line_4')->nullable();
-            $table->string('address_line_5')->nullable();
-            $table->string('BC');
+            $table->string('bc_num');
             $table->date('admission_date');
+            $table->unsignedBigInteger('grade');
+
             $table->string('parent_name');
             $table->string('parent_nic')->nullable();
             $table->string('parent_contact')->nullable();
+
             $table->string('status')->nullable();
+
             $table->timestamps();
         });
 

@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Grade;
 use Redirect;
 use Session;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class StudentController extends Controller{
+
     public function students(Request $request){
-        return view('student.students');
+        $grades = Grade::with('students')->get();
+        $data['grades'] = $grades;
+        return view('student.students')->with($data);
     }
 
     public function new(Request $request){
@@ -54,7 +58,7 @@ class StudentController extends Controller{
             $student->dob = $request->dob;
             $student->bc_num = $request->bc_num;
             $student->admission_date = $request->admission_date;
-            $student->grade = $request->grade;
+            $student->grade_id = $request->grade;
             $student->parent_name = $request->parent_name;
             $student->parent_nic = $request->parent_nic;
             $student->parent_contact = $request->parent_contact;

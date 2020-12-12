@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
             $table->date('dob');
             $table->string('bc_num');
             $table->date('admission_date');
-            $table->unsignedBigInteger('grade');
+            $table->unsignedBigInteger('grade_id');
 
             $table->string('parent_name');
             $table->string('parent_nic')->nullable();
@@ -34,7 +34,7 @@ class CreateStudentsTable extends Migration
         });
 
         Schema::table('students', function($table){
-            $table->foreign('grade')->references('id')->on('grades');
+            $table->foreign('grade_id')->references('id')->on('grades');
         });
     }
 

@@ -21,18 +21,18 @@
             <div class="main-card mb-3 card">
                 <div class="card-body">
                     <h5 class="card-title">Student Details</h5>
-                    {!! Form::open(['url' => '/students/add']) !!}
+                    {!! Form::open(['url' => '/students/add','enctype'=>'multipart/form-data']) !!}
                         <div class="form-row">
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="index_no" class="">Index No</label>
-                                    <input name="index_no" id="index_no" placeholder="Serial Number in Admission" type="text" class="form-control">
+                                    <input name="index_no" id="index_no" placeholder="Serial Number in Admission" type="text" class="form-control" value="{{old('index_no')}}">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="position-relative form-group">
                                     <label for="full_name" class="">Full Name</label>
-                                    <input name="full_name" id="full_name" placeholder="Name in full" type="text" class="form-control">
+                                    <input name="full_name" id="full_name" placeholder="Name in full" type="text" class="form-control" value="{{old('full_name')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -47,25 +47,25 @@
                             <div class="col-md-2">
                                 <div class="position-relative form-group">
                                     <label for="address_1" class="">Address Line 1</label>
-                                    <input name="address_1" id="address_1" placeholder="#House No" type="text" class="form-control">
+                                    <input name="address_1" id="address_1" placeholder="#House No" type="text" class="form-control" value="{{old('address_1')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="address_2" class="">Address Line 2</label>
-                                    <input name="address_2" id="address_2" placeholder="Name of Builing / House " type="text" class="form-control">
+                                    <input name="address_2" id="address_2" placeholder="Name of Builing / House " type="text" class="form-control" value="{{old('address_2')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="address_3" class="">Address Line 3</label>
-                                    <input name="address_3" id="address_3" placeholder="Name of the Street" type="text" class="form-control">
+                                    <input name="address_3" id="address_3" placeholder="Name of the Street" type="text" class="form-control" value="{{old('address_3')}}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="position-relative form-group">
                                     <label for="town" class="">Address Line 4</label>
-                                    <input name="town" id="town" placeholder="Name of Town / Village" type="text" class="form-control">
+                                    <input name="town" id="town" placeholder="Name of Town / Village" type="text" class="form-control" value="{{old('town')}}">
                                 </div>
                             </div>
                         </div>
@@ -74,25 +74,34 @@
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="dob" class="">Date of Birth</label>
-                                    <input name="dob" id="dob" placeholder="" type="date" class="form-control">
+                                    <input name="dob" id="dob" placeholder="" type="date" class="form-control" value="{{old('dob')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="bc_num" class="">BC Number</label>
-                                    <input name="bc_num" id="bc_num" placeholder="3 or 4 Digit" type="text" class="form-control">
+                                    <input name="bc_num" id="bc_num" placeholder="3 or 4 Digit" type="text" class="form-control" value="{{old('bc_num')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="admission_date" class="">Admission Date</label>
-                                    <input name="admission_date" id="admission_date" placeholder="" type="date" class="form-control">
+                                    <input name="admission_date" id="admission_date" placeholder="" type="date" class="form-control" value="{{old('admission_date')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="grade" class="">Grade</label>
-                                    <input name="grade" id="index_no" placeholder="" type="text" class="form-control">
+                                    <select name="grade" id="grade" placeholder="" type="text" class="form-control">
+                                        @foreach($grades as $grade)
+                                            <option value="{{$grade->id}}"
+                                                @if($grade->id==old('grade'))
+                                                @endif
+                                            >
+                                                {{$grade->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -103,19 +112,19 @@
                             <div class="col-md-5">
                                 <div class="position-relative form-group">
                                     <label for="parent_name" class="">Name of the Parent</label>
-                                    <input name="parent_name" id="parent_name" placeholder="Parent / Guardian" type="text" class="form-control">
+                                    <input name="parent_name" id="parent_name" placeholder="Parent / Guardian" type="text" class="form-control" value="{{old('parent_name')}}">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="position-relative form-group">
                                     <label for="parent_nic" class="">NIC</label>
-                                    <input name="parent_nic" id="parent_nic" type="text" placeholder="Parent's NIC" class="form-control">
+                                    <input name="parent_nic" id="parent_nic" type="text" placeholder="Parent's NIC" class="form-control" value="{{old('parent_nic')}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="position-relative form-group">
                                     <label for="parent_contact" class="">Contact</label>
-                                    <input name="parent_contact" id="parent_contact" type="text" placeholder="Phone Number" class="form-control">
+                                    <input name="parent_contact" id="parent_contact" type="text" placeholder="Phone Number" class="form-control" value="{{old('parent_contact')}}">
                                 </div>
                             </div>
                         </div>

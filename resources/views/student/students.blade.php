@@ -5,15 +5,19 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="pe-7s-graph text-success">
+                    <i class="fa fa-child text-success">
                     </i>
                 </div>
-                <div>Form Layouts
-                    <div class="page-title-subheading">Build whatever layout you need with our Architect framework.
+                <div>Students
+                    <div class="page-title-subheading">List of active students in database.
                     </div>
                 </div>
             </div>
-
+            <div class="page-title-actions">
+                <a href="/students/new" class="btn-shadow mr-3 btn btn-dark">
+                    New Student
+                </a>
+            </div>
         </div>
     </div>
     <div class="tab-content">
@@ -70,7 +74,24 @@
 
                                         <div class="m-1 mt-3 card text-center col-md-4 col-lg-3" style="float:left;">
                                             <div class="card-body">
-                                                <img src="assets/images/avatars/1.png" alt="" srcset="">
+                                                <?php
+                                                    $png_exists = Storage::disk('local')->exists('/public/photos/'.$student->index.'.png');
+                                                    $jpg_exists = Storage::disk('local')->exists('/photos/photos/'.$student->index.'.jpg');
+                                                    $jpeg_exists = Storage::disk('local')->exists('/photos/photos/'.$student->index.'.jpeg');
+                                                    if($png_exists){
+                                                        $photo =asset('/storage/photos')."/".$student->index.'.png';
+                                                    }
+                                                    elseif($jpg_exists) {
+                                                        $photo =asset('/storage/photos')."/".$student->index.'.jpg';
+                                                    }
+                                                    elseif($jpeg_exists) {
+                                                        $photo =asset('/storage/photos')."/".$student->index.'.jpeg';
+                                                    }
+                                                    else{
+                                                        $photo = 'assets/images/avatars/1.png';
+                                                    }
+                                                ?>
+                                                <img style="height:80px;width:80px" src="{{$photo}}" alt="" srcset="">
                                                 <br><br>
                                                 <h5 class="card-title">{{$student->full_name}}</h5>
                                                 <p class="text-left">
@@ -105,5 +126,6 @@
         </div>
     </div>
 </div>
+
 
 @endsection

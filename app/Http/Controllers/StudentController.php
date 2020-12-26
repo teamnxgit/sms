@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Grade;
 use Redirect;
 use Session;
+use Input;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class StudentController extends Controller{
@@ -18,13 +19,15 @@ class StudentController extends Controller{
     }
 
     public function new(Request $request){
-        return view('student.new');
+        $grades = Grade::all();
+        $data['grades'] = $grades;
+        return view('student.new')->with($data);
     }
 
     public function add(Request $request){
-        /*
+
         $request->validate([
-            'index'=>'required',
+            'index_no'=>'required',
             'full_name'=>'required',
             'dob'=>'required',
             'bc_num'=>'required',
@@ -32,13 +35,21 @@ class StudentController extends Controller{
             'grade'=>'required',
             'parent_name'=>'required'
         ]);
-            */
 
-        $student = Student::find($request->index);
-        if (isset($student)) {
+        $student_count = Student::where('index',$request->index_no)->count();
+
+        if ($student_count>0) {
             Session::flash('danger','Index number already exist!');
         }
+
         else {
+
+            if ($request->photo) {
+                $request->validate([
+                    'photo' => 'image|mimes:jpeg,png,jpg|max:2048',
+                ]);
+            }
+
             $student = New Student;
             $student->index = $request->index_no;
             $student->full_name = $request->full_name;
@@ -64,8 +75,17 @@ class StudentController extends Controller{
             $student->parent_contact = $request->parent_contact;
             $student->status = 'Active';
 
+            if ($request->hasFile('photo')) {
+                $image = $request->file('photo');
+                $name = $student->index.".".$image->getClientOriginalExtension();
+                $destinationPath = ('storage/photos/');
+                $image->move($destinationPath, $name);
+            }
+
             $student->save();
+            return redirect('/students/');
         }
-        //return Redirect::back();
+
+        return Redirect::back()->withInput();
     }
 }

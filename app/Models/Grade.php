@@ -12,4 +12,7 @@ class Grade extends Model
     public function students(){
         return $this->hasMany(Student::class);
     }
+    public function count_students(){
+        return $this->students()->count();
+    }
 }

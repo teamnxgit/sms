@@ -29,3 +29,7 @@ Route::get('/students/view/{id}','StudentController@view');
 Route::get('/students/new/','StudentController@new');
 
 Route::post('/students/add/','StudentController@add');
+
+Route::get('/grades/','GradeController@grades');
+
+Route::POST('/grades/remove','GradeController@remove');

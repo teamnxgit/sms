@@ -65,7 +65,7 @@
                                         {{$grade->name}} Students
                                         <div class="btn-actions-pane-right">
                                             <div class="nav">
-                                                <button class="btn btn-success">Generate {{$grade->name}} Marks Sheet</button>
+                                                <button class="btn btn-success">{{$grade->name}} Marks Sheet</button>
                                             </div>
                                         </div>
                                     </div>

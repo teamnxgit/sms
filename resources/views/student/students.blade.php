@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="page-title-actions">
-                <a href="/students/new" class="btn-shadow mr-3 btn btn-dark">
+                <a href="/students/new" class="btn-shadow mr-3 btn btn-primary">
                     New Student
                 </a>
             </div>
@@ -65,7 +65,9 @@
                                         {{$grade->name}} Students
                                         <div class="btn-actions-pane-right">
                                             <div class="nav">
-                                                <button class="btn btn-success">{{$grade->name}} Marks Sheet</button>
+                                                <a class="btn btn-primary text-light m-1">Export XLSX</a>
+                                                <a class="btn btn-primary text-light m-1">Marks List PDF</a>
+                                                <a class="btn btn-primary text-light m-1">Marks Schedule PDF</a>
                                             </div>
                                         </div>
                                     </div>

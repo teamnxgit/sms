@@ -11,7 +11,7 @@ use Session;
 class GradeController extends Controller
 {
     public function grades(){
-        $grades = Grade::all();
+        $grades = Grade::all()->sortBy('name');
         $students = Student::all();
         $data['students'] = $students;
         $data['grades'] = $grades;
@@ -19,10 +19,25 @@ class GradeController extends Controller
     }
 
     public function new(){
-
+        return view('grade/new');
     }
 
     Public function add(Request $request){
+        $request->validate([
+            'name'=>'required'
+        ]);
+        $grade_count = Grade::where('name',$request->name)->count();
+        if ($grade_count>0) {
+            Session::flash('danger','Grade/Class alredy exists');
+            return Redirect::back()->withInput();
+        }
+        else {
+            $grade = new Grade;
+            $grade->name = $request->name;
+            $grade->save();
+            Session::flash('success','Grade/class created');
+            return redirect('/grades/');
+        }
 
     }
 

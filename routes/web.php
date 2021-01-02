@@ -32,4 +32,8 @@ Route::post('/students/add/','StudentController@add');
 
 Route::get('/grades/','GradeController@grades');
 
+Route::get('/grades/new','GradeController@new');
+
+Route::POST('/grades/add','GradeController@add');
+
 Route::POST('/grades/remove','GradeController@remove');

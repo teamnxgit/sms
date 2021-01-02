@@ -5,7 +5,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fa fa-child text-success">
+                    <i class="fa fa-building text-success">
                     </i>
                 </div>
                 <div>Grades
